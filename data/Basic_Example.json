@@ -1,0 +1,190 @@
+{    
+    "Story_ID" : "ID01",
+    "Story_Name" : "Story_Example",
+    "Description" : "This is an example story",
+    "Difficulty_Modifier" : 1,
+    "Maximum_Agents": 4,
+    "Minimum_Agents": 1,
+    "Rewards": {
+        "Experience": 100,
+        "Gold": 100,
+        "Items": ["Item_1","Item_2","Item_3"]
+    },
+    "Start_Event_Id" : "Story_Start",
+    "Events" : {
+    "Story_Start" : {
+        "Name":"Story_Start",
+        "Description":"This is the beginning node",
+        "Node_Type": "Decision", // Decision, Combat
+        "Choices" : {
+            "Option_A" : {
+                "Name" : "Choice_1",
+                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
+                "Success_Pointer":"Story_2",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : ["Flag_1","Flag_2"],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_B" : {
+                "Name":"Choice_2",
+                "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
+                "Pointer" : "Story_3",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_C" : {
+                "Name":"Choice_3",
+                "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
+                "Pointer" : "Story_4",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.0",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : []
+            }
+        }
+    },
+    "Story_2" : {
+        "Name":"Story_2",
+        "Description":"This is the second story node",
+        "Node_Type": "Decision", // Decision, Combat
+        "Choices" : {
+            "Option_A" : {
+                "Name" : "Choice_1",
+                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
+                "Pointer":"End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : ["Flag_1","Flag_2","Flag_5"],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_B" : {
+                "Name":"Choice_2",
+                "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
+                "Pointer" : "End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_C" : {
+                "Name":"Choice_3",
+                "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
+                "Pointer" : "End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.0",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : []
+            }
+        }
+    },
+    "Story_3": {
+        "Name":"Story_3",
+        "Description":"This is the second story node",
+        "Node_Type": "Combat", // Decision, Combat
+        "Combat_Process": {
+            "Enemy_1": {
+                "Name": "Enemy_1",
+                "Description": "This is the first enemy",
+                "Health": 100, // derived from body + level
+                "Level": 5,
+                "Body": 10,
+                "Cool": 10,
+                "Intelligence": 10,
+                "Reflex": 10,
+                "Tech": 10,
+                "Skills": {
+                    "Handguns": 10,
+                    "Blades": 10
+                },
+                "Armor": 10,
+                "Weapon": [{
+                    "Name": "Pistol",
+                    "Category": "Handguns",
+                    "Base_Damage": 10,
+                    "Crit_Chance": 0.1,
+                    "Acccuracy": 0.5
+                }],
+                "Crit_Chance": 0.1, // derived from cool + Weapon_CritChance + level
+                "Accuracy": 10, // derived from reflex + Weapon_Accuracy + level +  stat_skill_level
+                "Evasion": 10 // derived from reflex + level
+            },
+        },
+        "On_Win": {
+            "Pointer": "Story_4",
+            "Rewards": {
+                "Experience": 100,
+                "Gold": 100,
+                "Items": ["Item_1","Item_2","Item_3"]
+            }
+        },
+        "On_Loss": {
+            "Pointer": "Story_Absolute_Fail"
+        }
+    },
+    "Story_4": {
+        "Name":"Story_3",
+        "Description":"This is the second story node",
+        "Node_Type": "Decision", // Decision, Combat
+        "Choices" : {
+            "Option_A" : {
+                "Name" : "Choice_1",
+                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
+                "Pointer":"End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : ["Flag_1","Flag_2","Flag_5"],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_B" : {
+                "Name":"Choice_2",
+                "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
+                "Pointer" : "End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.5",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : ["Flag_3","Flag_4"]
+            },
+            "Option_C" : {
+                "Name":"Choice_3",
+                "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
+                "Pointer" : "End_Story",
+                "Failure_Pointer" : "Story_Fail",
+                "Failure_Chance" : "0.0",
+                "Positive_Modifier_Flags" : [],
+                "Negative_Modifier_Flags" : []
+            }
+        }
+    },
+    "Story_Fail": {
+        "Name": "This is a failure node",
+        "Description": "This is a failure node",
+        "Node_Type": "Decision", // Decision, Combat
+        "Choices": {
+            // more choices, a fail node can act in the same fashion as the other nodes, wth branching choices, the name is simply for reference to structure the game
+        }
+    },
+    "Story_Absolute_Fail": {
+        "Name": "This is an absolute fail",
+        "Description": "This is an absolute fail, where the team gets wiped out",
+        "Node_Type": "End",
+        "Team_Death": "True" // on return from story processing, the team is wiped out, and they are removed from the AgentPool
+    },
+    "Story_Mission_Fail": {
+        "Name": "This is an absolute fail",
+        "Description": "This is an absolute fail, where the team gets wiped out",
+        "Node_Type": "End",
+        "Team_Death": "False", // on return from story processing, the team is not wiped out, but they fail mission and no rewards are given
+        "Success": "False"
+    },
+    "End_Story": {
+        "Name": "This is the end of the story",
+        "Description": "This is the end of the story",
+        "Node_Type": "End",
+        "Team_Death": "False",
+        "Success": "True"
+    }
+}
+}
