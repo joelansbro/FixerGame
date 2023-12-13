@@ -145,6 +145,10 @@ public class DecisionEvent : StoryEvent
         while (true)
         {
             Console.WriteLine("Enter your decision:");
+            foreach (KeyValuePair<string, Choice> choice in Choices)
+            {
+                Console.WriteLine($"{choice.Key}: {choice.Value.Description}");
+            }
             string input = Console.ReadLine();
             if (Choices.ContainsKey(input))
             {
