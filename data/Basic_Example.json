@@ -15,7 +15,7 @@
     "Story_Start" : {
         "Name":"Story_Start",
         "Description":"This is the beginning node",
-        "Node_Type": "Decision", // Decision, Combat
+        "nodeType": "Decision", // Decision, Combat
         "Choices" : {
             "Option_A" : {
                 "Name" : "Choice_1",
@@ -49,7 +49,7 @@
     "Story_2" : {
         "Name":"Story_2",
         "Description":"This is the second story node",
-        "Node_Type": "Decision", // Decision, Combat
+        "nodeType": "Decision", // Decision, Combat
         "Choices" : {
             "Option_A" : {
                 "Name" : "Choice_1",
@@ -83,7 +83,7 @@
     "Story_3": {
         "Name":"Story_3",
         "Description":"This is the second story node",
-        "Node_Type": "Combat", // Decision, Combat
+        "nodeType": "Combat", // Decision, Combat
         "Combat_Process": {
             "Enemy_1": {
                 "Name": "Enemy_1",
@@ -127,7 +127,7 @@
     "Story_4": {
         "Name":"Story_3",
         "Description":"This is the second story node",
-        "Node_Type": "Decision", // Decision, Combat
+        "nodeType": "Decision", // Decision, Combat
         "Choices" : {
             "Option_A" : {
                 "Name" : "Choice_1",
@@ -161,7 +161,7 @@
     "Story_Fail": {
         "Name": "This is a failure node",
         "Description": "This is a failure node",
-        "Node_Type": "Decision", // Decision, Combat
+        "nodeType": "Decision", // Decision, Combat
         "Choices": {
             // more choices, a fail node can act in the same fashion as the other nodes, wth branching choices, the name is simply for reference to structure the game
         }
@@ -169,20 +169,20 @@
     "Story_Absolute_Fail": {
         "Name": "This is an absolute fail",
         "Description": "This is an absolute fail, where the team gets wiped out",
-        "Node_Type": "End",
+        "nodeType": "End",
         "Team_Death": "True" // on return from story processing, the team is wiped out, and they are removed from the AgentPool
     },
     "Story_Mission_Fail": {
         "Name": "This is an absolute fail",
         "Description": "This is an absolute fail, where the team gets wiped out",
-        "Node_Type": "End",
+        "nodeType": "End",
         "Team_Death": "False", // on return from story processing, the team is not wiped out, but they fail mission and no rewards are given
         "Success": "False"
     },
     "End_Story": {
         "Name": "This is the end of the story",
         "Description": "This is the end of the story",
-        "Node_Type": "End",
+        "nodeType": "End",
         "Team_Death": "False",
         "Success": "True"
     }
