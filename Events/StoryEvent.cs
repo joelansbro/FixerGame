@@ -24,7 +24,7 @@ abstract public class StoryEvent
 
     string nodeType = jObject[nameof(NodeType)]?.Value<string>() ?? throw new JsonException("Invalid node type");
 
-    Console.WriteLine(nodeType);
+    Logger.Log(nodeType);
     switch (nodeType)
     {
         case "Decision":

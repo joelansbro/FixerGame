@@ -14,32 +14,32 @@
     "Events" : [
     {
         "Name":"Story_Start",
-        "Description":"This is the beginning of the mission",
+        "Description":"This is the beginning of the mission. A Decision Tree. (Find the box)",
         "NodeType": "Decision",
         "Choices" : {
-            "Option_A" : {
-                "Name" : "Choice_1",
-                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
-                "SuccessPointer":"Story_2",
-                "FailurePointer" : "Story_Fail",
+            "A" : {
+                "Name" : "Look in the cupboards",
+                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure). Difficulty is set to 50%",
+                "SuccessPointer":"Story_cupboard",
+                "FailurePointer" : "Story_Mission_Fail",
                 "FailureChance" : 0.5,
-                "PosModifiers" : ["Flag_1","Flag_2"],
-                "NegModifiers" : ["Flag_3","Flag_4"]
+                "PosModifiers" : ["Bold","Cyberpunk"],
+                "NegModifiers" : ["Sharp Mind","Belongs in the Trash"]
             },
-            "Option_B" : {
-                "Name":"Choice_2",
-                "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
-                "SuccessPointer" : "Story_3",
-                "FailurePointer" : "Story_Fail",
+            "B" : {
+                "Name":"Look in the wardrobe",
+                "Description" : "This choice will lead you either to combat or to the cupboard to show off failure can be branching paths. 50%",
+                "SuccessPointer" : "Story_cupboard",
+                "FailurePointer" : "Story_wardrobe_combat",
                 "FailureChance" : 0.5,
                 "PosModifiers" : [],
-                "NegModifiers" : ["Flag_3","Flag_4"]
+                "NegModifiers" : ["Bold","Brash"]
             },
-            "Option_C" : {
-                "Name":"Choice_3",
+            "C" : {
+                "Name":"Use magic to find the box without failure.",
                 "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
                 "SuccessPointer" : "Story_4",
-                "FailurePointer" : "Story_Fail",
+                "FailurePointer" : "Story_Mission_Fail",
                 "FailureChance" : 0.0,
                 "PosModifiers" : [],
                 "NegModifiers" : []
@@ -47,41 +47,41 @@
         }
     },
     {
-        "Name":"Story_2",
-        "Description":"This is the second story node",
+        "Name":"Story_cupboard",
+        "Description":"This is the second story node. Decision Tree, success from previous node Story_start. (Find box in cupboard)",
         "NodeType": "Decision",
         "Choices" : {
             "Option_A" : {
-                "Name" : "Choice_1",
-                "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
+                "Name" : "Confirm finding the box in the cupboard",
+                "Description" : "This choice will lead immediately to winning the story.",
                 "SuccessPointer":"End_Story",
-                "FailurePointer" : "Story_Fail",
-                "FailureChance" : "0.5",
-                "PosModifiers" : ["Flag_1","Flag_2","Flag_5"],
-                "NegModifiers" : ["Flag_3","Flag_4"]
+                "FailurePointer" : "Story_Mission_Fail",
+                "FailureChance" : "0.0",
+                "PosModifiers" : [],
+                "NegModifiers" : []
             },
             "Option_B" : {
-                "Name":"Choice_2",
-                "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
+                "Name":"Do a low gamble to find the box in the cupboard",
+                "Description" : "This is a choice step with a low chance of failure. 20%. However negative traits boost this",
                 "SuccessPointer" : "End_Story",
-                "FailurePointer" : "Story_Fail",
-                "FailureChance" : "0.5",
+                "FailurePointer" : "Story_Mission_Fail",
+                "FailureChance" : "0.2",
                 "PosModifiers" : [],
-                "NegModifiers" : ["Flag_3","Flag_4"]
+                "NegModifiers" : ["Fast Learner","Dashing"]
             },
             "Option_C" : {
-                "Name":"Choice_3",
-                "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
-                "SuccessPointer" : "End_Story",
-                "FailurePointer" : "Story_Fail",
-                "FailureChance" : "0.0",
+                "Name":"Kill All",
+                "Description" : "This is a disasterous choice which has a high chance of failing and wiping the team. otherwise just fail the mission.",
+                "SuccessPointer" : "Story_Mission_Fail",
+                "FailurePointer" : "Story_Absolute_Fail",
+                "FailureChance" : "0.8",
                 "PosModifiers" : [],
                 "NegModifiers" : []
             }
         }
     },
     {
-        "Name":"Story_3",
+        "Name":"Story_wardrobe_combat",
         "Description":"This is the second story node",
         "NodeType": "Combat",
         "CombatProcess": {
@@ -124,33 +124,33 @@
     },
     {
         "Name":"Story_4",
-        "Description":"This is the second story node",
+        "Description":"This is an end node where all roads lead to an end state of success or failure. Branching paths can converge near to the end depending on player stats.",
         "NodeType": "Decision",
         "Choices" : {
             "Option_A" : {
-                "Name" : "Choice_1",
+                "Name" : "End win",
                 "Description" : "This is the first choice pointing to the next story node. This chance has both positive (which lower chances of failure) and negative chances (which increase chances of failure).",
                 "SuccessPointer":"End_Story",
-                "FailurePointer" : "Story_Fail",
+                "FailurePointer" : "Story_Mission_Fail",
                 "FailureChance" : "0.5",
                 "PosModifiers" : ["Flag_1","Flag_2","Flag_5"],
                 "NegModifiers" : ["Flag_3","Flag_4"]
             },
             "Option_B" : {
-                "Name":"Choice_2",
+                "Name":"End fail",
                 "Description" : "This is the second choice pointing to the next story node. The chance has no positive modifiers, only negative ones.",
-                "SuccessPointer" : "End_Story",
-                "FailurePointer" : "Story_Fail",
+                "SuccessPointer" : "Story_Fail",
+                "FailurePointer" : "Story_Mission_Fail",
                 "FailureChance" : "0.5",
                 "PosModifiers" : [],
                 "NegModifiers" : ["Flag_3","Flag_4"]
             },
             "Option_C" : {
-                "Name":"Choice_3",
-                "Description" : "This is the third choice pointing to the next story node. The failure chance is zero as choosing this option absolutely succeeds.",
-                "SuccessPointer" : "End_Story",
-                "FailurePointer" : "Story_Fail",
-                "FailureChance" : "0.0",
+                "Name":"End gamble",
+                "Description" : "This is an end program that dictates either a mission failure or a team wipe also, not very good!",
+                "SuccessPointer" : "Story_Mission_Fail",
+                "FailurePointer" : "Story_Absolute_Fail",
+                "FailureChance" : "0.5",
                 "PosModifiers" : [],
                 "NegModifiers" : []
             }
@@ -197,7 +197,7 @@
     },
     {
         "Name": "End_Story",
-        "Description": "This is the end of the story",
+        "Description": "This is the end of the story. You have succeeded",
         "NodeType": "End",
         "TeamDeath": "False",
         "Success": "True"

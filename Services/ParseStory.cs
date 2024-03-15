@@ -50,24 +50,24 @@ public class EventHolder
         StoryEvent storyEvent = StoryEvent.LoadStoryEvent(eventObject.ToString());
         if (storyEvent is DecisionEvent decisionEvent)
         {
-            Console.WriteLine("Adding decision event");
-            Console.WriteLine(decisionEvent.Name);
-            Console.WriteLine(decisionEvent.Description);
-            Console.WriteLine(decisionEvent.NodeType);
+            Logger.Log("Adding decision event");
+            Logger.Log(decisionEvent.Name);
+            Logger.Log(decisionEvent.Description);
+            Logger.Log(decisionEvent.NodeType);
             eventHolder.Events.Add(decisionEvent.Name, decisionEvent);
         } else if (storyEvent is CombatEvent combatEvent)
         {
-            Console.WriteLine("Adding combat event");
-            Console.WriteLine(combatEvent.Name);
-            Console.WriteLine(combatEvent.Description);
-            Console.WriteLine(combatEvent.NodeType);
+            Logger.Log("Adding combat event");
+            Logger.Log(combatEvent.Name);
+            Logger.Log(combatEvent.Description);
+            Logger.Log(combatEvent.NodeType);
             eventHolder.Events.Add(combatEvent.Name, combatEvent);
         } else if (storyEvent is EndEvent endEvent)
         {
-            Console.WriteLine("Adding end event");
-            Console.WriteLine(endEvent.Name);
-            Console.WriteLine(endEvent.Description);
-            Console.WriteLine(endEvent.NodeType);
+            Logger.Log("Adding end event");
+            Logger.Log(endEvent.Name);
+            Logger.Log(endEvent.Description);
+            Logger.Log(endEvent.NodeType);
             eventHolder.Events.Add(endEvent.Name, endEvent);
         } else{
             throw new ArgumentException($"Invalid node type: {storyEvent.NodeType}");
@@ -99,9 +99,9 @@ public class EventHolder
             foreach (Agent agent in agents)
             {
                 Console.WriteLine(agent.Name);
-                if (agent.traitList != null)
+                if (agent.TraitList != null)
                 {
-                    agentTraits.AddRange(agent.traitList.Select(trait => trait.ToString()));
+                    agentTraits.AddRange(agent.TraitList.Select(trait => trait.ToString()));
                 }
             }
 
@@ -118,6 +118,7 @@ public class EventHolder
                 posModifierCount += PosModifiers.Count(modifier => modifier == trait);
                 negModifierCount += NegModifiers.Count(modifier => modifier == trait);
             }
+
 
             double posModifierMultiplier = posModifierCount * 0.1;
             double negModifierMultiplier = negModifierCount * 0.1;

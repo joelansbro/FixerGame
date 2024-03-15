@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace FixerGame
 {
@@ -14,13 +16,20 @@ namespace FixerGame
         private int _Intelligence;
         private int _Reflexes;
         private int _Technical_Ability;
-        public List<Trait> traitList { get; set; }
+        public List<string> TraitList { get; set; }
+        
+        public Agent()
+        {
+            Id = _nextId;
+            _nextId++;
+        }
+
         public string Class
         {
             get { return _class; }
             set{
                 if (IsValidClass(value)) {_class = value;}
-                else {throw new ArgumentException("Invalid class");}
+                else {throw new ArgumentException("Invalid class: " + value);}
             }
         }
 
@@ -28,7 +37,7 @@ namespace FixerGame
             get { return _Age; }
             set{
                 if (value >= 18 && value <= 60) {_Age = value;}
-                else {throw new ArgumentException("Invalid age");}
+                else {throw new ArgumentException("Invalid age: " + value);}
             }
         }
 
@@ -98,20 +107,22 @@ namespace FixerGame
             {return false;}
         }
 
-        public void AddTrait(Trait trait)
+        public void AddTrait(string trait)
         {
-            if (traitList.Count < 4)
+            if (TraitList.Count < 4)
             {
-                traitList.Add(trait);
+                TraitList.Add(trait);
             }
         }
 
-        public void RemoveTrait(Trait trait)
+        public void RemoveTrait(string trait)
         {
-            traitList.Remove(trait);
+            TraitList.Remove(trait);
         }
 
-        public Agent(string name, string className, int age, int body, int cool, int intelligence, int reflexes, int technical_ability)
+        // class constructor with a list of traits and specific stats
+        public Agent(string name, string className, int age, int body, int cool, int intelligence, 
+            int reflexes, int technical_ability, List<string> traits)
         {
             Name = name;
             Class = className;
@@ -120,7 +131,8 @@ namespace FixerGame
             Cool = cool;
             Intelligence = intelligence;
             Reflexes = reflexes;
-            Technical_Ability = technical_ability;    
+            Technical_Ability = technical_ability;
+            TraitList = traits;
         }
 
         private int GenerateRandomStat()
@@ -142,6 +154,20 @@ namespace FixerGame
             Technical_Ability = GenerateRandomStat();
         }
 
+        // class constructor with a list of traits
+        public Agent(string name, string className, List<string> traits)
+        {
+            Name = name;
+            Class = className;
+            Age = 18;
+            Body = GenerateRandomStat();
+            Cool = GenerateRandomStat();
+            Intelligence = GenerateRandomStat();
+            Reflexes = GenerateRandomStat();
+            Technical_Ability = GenerateRandomStat();
+            TraitList = traits;
+        }
+
         public void PrintStats()
         {
             Console.WriteLine($"Name: {Name}");
@@ -151,6 +177,15 @@ namespace FixerGame
             Console.WriteLine($"Intelligence: {Intelligence}");
             Console.WriteLine($"Reflexes: {Reflexes}");
             Console.WriteLine($"Technical Ability: {Technical_Ability}");
+        }
+
+        [JsonProperty("Traits")]
+        public List<string> TraitNames { get; set; }
+
+        public static List<Agent> LoadAgentList(string json)
+        {
+            List<Agent> agentList = JsonConvert.DeserializeObject<List<Agent>>(json);
+            return agentList;
         }
     }
 }

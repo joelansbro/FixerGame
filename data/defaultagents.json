@@ -1,0 +1,50 @@
+[
+    {
+        "Id": 1,
+        "Name": "Nova Skye",
+        "Class": "Netrunner",
+        "Age": 20,
+        "Body": 5,
+        "Cool": 5,
+        "Intelligence": 5,
+        "Reflexes": 5,
+        "Tech": 5,
+        "Traits": [
+            "Bold",
+            "Brash",
+            "Belongs in the Trash"
+        ]
+    },
+    {
+        "Id": 2,
+        "Name": "V",
+        "Class": "Solo",
+        "Age": 40,
+        "Body": 5,
+        "Cool": 5,
+        "Intelligence": 5,
+        "Reflexes": 5,
+        "Tech": 5,
+        "Traits": [
+            "Cyberpunk",
+            "Videogame",
+            "Dashing"
+        ]
+    },
+    {
+        "Id": 3,
+        "Name": "Nexus Frost",
+        "Class": "Medtech",
+        "Age": 18,
+        "Body": 5,
+        "Cool": 5,
+        "Intelligence": 5,
+        "Reflexes": 5,
+        "Tech": 5,
+        "Traits": [
+            "Fast Learner",
+            "Quick Reflexes",
+            "Sharp Mind"
+        ]
+    }
+]
