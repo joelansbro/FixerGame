@@ -27,6 +27,7 @@ namespace FixerGame
             while(currentEventId != null)
             {
                 StoryEvent currentEvent = story.Events[currentEventId];
+                // TODO: Change this to read the typeOf() and stop messing about with separate string params
                 if (currentEvent is DecisionEvent decis){
                     DecisionEvent decisionEvent = (DecisionEvent)currentEvent;
                     Choice choice = decisionEvent.MakeDecision();
